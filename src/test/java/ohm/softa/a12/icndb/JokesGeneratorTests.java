@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-import static de.thro.inf.prg3.a12.util.FunctionalUtils.zip;
+import static ohm.softa.a12.util.FunctionalUtils.zip;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**

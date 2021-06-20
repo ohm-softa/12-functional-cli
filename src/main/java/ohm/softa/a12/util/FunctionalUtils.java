@@ -1,4 +1,4 @@
-package de.thro.inf.prg3.a12.util;
+package ohm.softa.a12.util;
 
 import java.util.*;
 import java.util.function.BiFunction;

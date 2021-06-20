@@ -1,4 +1,4 @@
-package de.thro.inf.prg3.a12.samples;
+package ohm.softa.a12.samples;
 
 import java.util.Random;
 import java.util.function.Supplier;
