@@ -1,8 +1,7 @@
 package ohm.softa.a12;
 
-import ohm.softa.a12.icndb.JokeGenerator;
+import ohm.softa.a12.cnjdb.JokeGenerator;
 import ohm.softa.a12.model.JokeDto;
-import ohm.softa.a12.model.ResponseWrapper;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -39,8 +38,6 @@ public abstract class App {
 				.skip(skipCount)
 				/* limit the infinite stream */
 				.limit(jokeCount)
-				/* unwrap the ResponseWrapper */
-				.map(ResponseWrapper::getValue)
 				/* unwrap the joke String */
 				.map(JokeDto::getJoke)
 				/* print joke to STDOUT */
@@ -59,6 +56,7 @@ public abstract class App {
 
 	/**
 	 * Utility method to read an integer
+	 *
 	 * @param message message provided to the user
 	 * @return read integer value
 	 */
@@ -79,7 +77,7 @@ public abstract class App {
 	 *
 	 * @return stream of JokeDtos wrapped in ResponseWrapper objects
 	 */
-	private static Stream<ResponseWrapper<JokeDto>> readJokeSource() {
+	private static Stream<JokeDto> readJokeSource() {
 		System.out.println("Which joke source do you want to use?");
 		System.out.println("1) Random jokes");
 		System.out.println("2) Linear by id");

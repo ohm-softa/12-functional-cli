@@ -1,10 +1,9 @@
-package ohm.softa.a12.icndb;
+package ohm.softa.a12.cnjdb;
 
-import ohm.softa.a12.icndb.suppliers.AllJokesSupplierV2;
-import ohm.softa.a12.icndb.suppliers.RandomJokeSupplier;
+import ohm.softa.a12.cnjdb.suppliers.AllJokesSupplier;
+import ohm.softa.a12.cnjdb.suppliers.CategoryJokeSupplier;
+import ohm.softa.a12.cnjdb.suppliers.RandomJokeSupplier;
 import ohm.softa.a12.model.JokeDto;
-import ohm.softa.a12.model.ResponseWrapper;
-import org.apache.commons.lang3.NotImplementedException;
 
 
 import java.util.stream.Stream;
@@ -22,7 +21,7 @@ public final class JokeGenerator {
 	 *
 	 * @return stream of random jokes wrapped in ResponseWrapper objects
 	 */
-	public Stream<ResponseWrapper<JokeDto>> randomJokesStream() {
+	public Stream<JokeDto> randomJokesStream() {
 		return Stream.generate(new RandomJokeSupplier());
 	}
 
@@ -31,7 +30,11 @@ public final class JokeGenerator {
 	 *
 	 * @return stream of jokes wrapped in ResponseWrapper objects
 	 */
-	public Stream<ResponseWrapper<JokeDto>> jokesStream() {
-		return Stream.generate(new AllJokesSupplierV2());
+	public Stream<JokeDto> jokesStream() {
+		return Stream.generate(new AllJokesSupplier());
+	}
+
+	public Stream<JokeDto> categoryJokesStream(String category) {
+		return Stream.generate(new CategoryJokeSupplier(category));
 	}
 }

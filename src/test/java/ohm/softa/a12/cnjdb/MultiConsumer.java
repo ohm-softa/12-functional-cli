@@ -1,4 +1,4 @@
-package ohm.softa.a12.icndb;
+package ohm.softa.a12.cnjdb;
 
 import java.util.function.Consumer;
 
