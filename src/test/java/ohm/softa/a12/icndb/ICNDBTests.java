@@ -5,8 +5,10 @@ import ohm.softa.a12.cnjdb.CNJDBService;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,5 +57,16 @@ public class ICNDBTests {
 		var j = icndbApi.getJoke("S5uiluahRM26CTWRZNXfwg");
 		assertNotNull(j);
 		logger.info(j.toString());
+	}
+
+	@Test
+	void testFiniteStream() {
+		LinkedList<String> xs = new LinkedList<>();
+		xs.add("a");
+
+		Stream<String> ss = xs.stream();
+
+		xs.add("b");
+		ss.forEach(System.out::println);
 	}
 }

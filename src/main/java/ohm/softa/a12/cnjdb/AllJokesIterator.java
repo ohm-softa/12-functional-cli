@@ -3,7 +3,9 @@ package ohm.softa.a12.cnjdb;
 import ohm.softa.a12.model.JokeDto;
 import org.apache.commons.lang3.NotImplementedException;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Iterator to retrieve all jokes of the ICNDB until collision.
@@ -13,17 +15,33 @@ public final class AllJokesIterator implements Iterator<JokeDto> {
     /* ICNDB API proxy to retrieve jokes */
     private final CNJDBApi icndbApi;
 
-    public AllJokesIterator() {
-        icndbApi = CNJDBService.getInstance();
-    }
+	private Set<String> ids = new HashSet<>();
+	private JokeDto cur = retrieve();
 
 	@Override
 	public boolean hasNext() {
-		throw new NotImplementedException("Method `get()` is not implemented");
+		return cur != null;
+	}
+
+	private JokeDto retrieve() {
+		try {
+			JokeDto j = icndbApi.getRandomJoke();
+			if (ids.contains(j.getId()))
+				return null;
+			return j;
+		} catch(Exception e) {
+			return null;
+		}
 	}
 
 	@Override
 	public JokeDto next() {
-		throw new NotImplementedException("Method `get()` is not implemented");
+		JokeDto tmp = cur;
+		cur = retrieve();
+		return tmp;
 	}
+
+    public AllJokesIterator() {
+        icndbApi = CNJDBService.getInstance();
+    }
 }

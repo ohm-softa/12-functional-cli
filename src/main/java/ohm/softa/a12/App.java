@@ -27,6 +27,12 @@ public abstract class App {
              * filter such jokes that are longer than 80 characters (typical terminal width)
              * use `skip` and `limit` to retrieve the required elements
              * and print the jokes to the STDOUT */
+			jokesSource
+				.filter(j -> j.getValue().length() <= 80)
+				.skip(skipCount)
+				.limit(jokeCount)
+				.map(JokeDto::getValue)
+				.forEach(System.out::println);
 
             System.out.println("If you want to quit press [Q] otherwise press [C] to continue.");
             var input = inputScanner.next();
