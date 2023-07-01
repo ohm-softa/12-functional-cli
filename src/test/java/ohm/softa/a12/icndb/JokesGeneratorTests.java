@@ -9,14 +9,12 @@ class JokesGeneratorTests {
 
     @Test
     void testRandomStream() {
-        /* timeout to ensure that stream does not loop forever */
         /* TODO implement a test for the random joke stream */
     }
 
 
     @Test
-    void testJokesStream() {
-        /* TODO implement a test for the linear jokes generator */
+    void testAllJokesStream() {
+        /* TODO implement a test for the all jokes generator; since there are many jokes, a timeout would make sense */
     }
-
 }

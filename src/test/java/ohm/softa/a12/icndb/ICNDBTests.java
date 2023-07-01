@@ -29,7 +29,7 @@ public class ICNDBTests {
 		var collision = false;
 
 		while (requests++ < REQUEST_COUNT) {
-			var joke = icndbApi.getRandomJoke();
+			var joke = icndbApi.getRandomJoke().get();
 
 			if (ids.contains(joke.getId())) {
 				logger.info(String.format("Collision at joke %s", joke.getId()));
@@ -46,7 +46,7 @@ public class ICNDBTests {
 
 	@Test
 	void testGetRandomJokeByCategory() throws ExecutionException, InterruptedException {
-		var j = icndbApi.getRandomJokeByCategory("food");
+		var j = icndbApi.getRandomJokeByCategory("food").get();
 		assertNotNull(j);
 		assertTrue(j.getCategories().contains("food"));
 		logger.info(j.toString());
@@ -54,7 +54,7 @@ public class ICNDBTests {
 
 	@Test
 	void testGetJokeById() throws ExecutionException, InterruptedException {
-		var j = icndbApi.getJoke("S5uiluahRM26CTWRZNXfwg");
+		var j = icndbApi.getJoke("S5uiluahRM26CTWRZNXfwg").get();
 		assertNotNull(j);
 		logger.info(j.toString());
 	}
