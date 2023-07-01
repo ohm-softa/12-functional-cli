@@ -2,6 +2,7 @@ package ohm.softa.a12.icndb;
 
 import ohm.softa.a12.cnjdb.CNJDBApi;
 import ohm.softa.a12.cnjdb.CNJDBService;
+import ohm.softa.a12.model.JokeDto;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -20,6 +21,12 @@ public class ICNDBTests {
 
 	public ICNDBTests() {
 		this.icndbApi = CNJDBService.getInstance();
+	}
+
+	@Test
+	void testRandomJoke() throws ExecutionException, InterruptedException {
+		JokeDto j = icndbApi.getRandomJoke().get();
+		System.out.println(j);
 	}
 
 	@Test
@@ -57,16 +64,5 @@ public class ICNDBTests {
 		var j = icndbApi.getJoke("S5uiluahRM26CTWRZNXfwg").get();
 		assertNotNull(j);
 		logger.info(j.toString());
-	}
-
-	@Test
-	void testFiniteStream() {
-		LinkedList<String> xs = new LinkedList<>();
-		xs.add("a");
-
-		Stream<String> ss = xs.stream();
-
-		xs.add("b");
-		ss.forEach(System.out::println);
 	}
 }

@@ -13,9 +13,8 @@ import java.util.Set;
 public final class AllJokesIterator implements Iterator<JokeDto> {
 
     /* ICNDB API proxy to retrieve jokes */
-    private final CNJDBApi icndbApi;
-
-	private Set<String> ids = new HashSet<>();
+    private final CNJDBApi icndbApi = CNJDBService.getInstance();
+	private final Set<String> ids = new HashSet<>();
 	private JokeDto cur = retrieve();
 
 	@Override
@@ -25,11 +24,14 @@ public final class AllJokesIterator implements Iterator<JokeDto> {
 
 	private JokeDto retrieve() {
 		try {
-			JokeDto j = icndbApi.getRandomJoke();
+			JokeDto j = icndbApi.getRandomJoke().get();
 			if (ids.contains(j.getId()))
 				return null;
+			else
+				ids.add(j.getId());
 			return j;
 		} catch(Exception e) {
+			System.err.println(e);
 			return null;
 		}
 	}
@@ -40,8 +42,4 @@ public final class AllJokesIterator implements Iterator<JokeDto> {
 		cur = retrieve();
 		return tmp;
 	}
-
-    public AllJokesIterator() {
-        icndbApi = CNJDBService.getInstance();
-    }
 }

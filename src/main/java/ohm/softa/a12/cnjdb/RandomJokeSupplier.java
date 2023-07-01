@@ -5,6 +5,7 @@ import ohm.softa.a12.cnjdb.CNJDBService;
 import ohm.softa.a12.model.JokeDto;
 import org.apache.commons.lang3.NotImplementedException;
 
+import java.util.concurrent.ExecutionException;
 import java.util.function.Supplier;
 
 /**
@@ -21,8 +22,10 @@ public final class RandomJokeSupplier implements Supplier<JokeDto> {
     }
 
     public JokeDto get() {
-        /* TODO fetch a random joke synchronously
-         * if an exception occurs return null */
-        throw new NotImplementedException("Method `get()` is not implemented");
-    }
+		try {
+			return icndbApi.getRandomJoke().get();
+		} catch (InterruptedException | ExecutionException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

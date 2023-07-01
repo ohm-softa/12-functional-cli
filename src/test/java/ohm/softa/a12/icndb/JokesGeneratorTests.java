@@ -1,7 +1,12 @@
 package ohm.softa.a12.icndb;
 
 import ohm.softa.a12.cnjdb.JokeGenerator;
+import ohm.softa.a12.model.JokeDto;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 class JokesGeneratorTests {
 
@@ -9,12 +14,18 @@ class JokesGeneratorTests {
 
     @Test
     void testRandomStream() {
-        /* TODO implement a test for the random joke stream */
+        jokeGenerator.randomJokesStream()
+			.limit(5)
+			.forEach(System.out::println);
     }
-
 
     @Test
     void testAllJokesStream() {
-        /* TODO implement a test for the all jokes generator; since there are many jokes, a timeout would make sense */
+		// try to retrieve all tests...
+		Set<JokeDto> all = jokeGenerator.allJokesStream().collect(Collectors.toSet());
+		System.out.println("Retrieved all " + all.size() + " jokes.");
+		all.stream()
+			.map(JokeDto::getValue)
+			.forEach(System.out::println);
     }
 }
